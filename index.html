@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Poorna's Kitchen — Staff Console</title>
+<link rel="icon" href="assets/poornas-kitchen-logo.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ ICON SPRITE ============ -->
+<svg class="sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-dashboard" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-5H4v5Zm10 0h6v-9h-6v9Zm0-16v5h6V4h-6Z"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 19v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 17.5V19"/><circle cx="10" cy="8" r="3.2"/><path d="M20 19v-1.5a3.5 3.5 0 0 0-2.6-3.4M15.4 5.2a3.2 3.2 0 0 1 0 5.6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.3"/><path d="m16 16 4 4"/></symbol>
+  <symbol id="i-userplus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="8" r="3.3"/><path d="M15 19v-1.5a3.5 3.5 0 0 0-3.5-3.5h-4A3.5 3.5 0 0 0 4 17.5V19M18 7v6M21 10h-6"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 5v4h4M12 7.5V12l3 1.8"/></symbol>
+  <symbol id="i-reward" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.4-1.3 6.4 4.8-2.6 4.8 2.6-1.3-6.4"/></symbol>
+  <symbol id="i-reports" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V10M12 20V4M19 20v-7"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 14.4a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V20a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-2.7-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H4a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.1-2.7l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3 1.6 1.6 0 0 0 1-1.4V4a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1 2.7H20a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.4 1Z"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 19H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h8M17 15l3-3-3-3M20 12H10"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+  <symbol id="i-eyeoff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M9.6 6.3A8.9 8.9 0 0 1 12 6c6 0 9.5 6 9.5 6a16 16 0 0 1-3.3 3.9M6.4 8.2A15.7 15.7 0 0 0 2.5 12S6 18 12 18a9 9 0 0 0 3.2-.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 8v5M12 16.5v.01"/><circle cx="12" cy="12" r="8.5"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 11h2M12 11h2M17 11h.01M7 15h10"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2.2"/><path d="M11 18h2"/></symbol>
+</svg>
+
+<!-- ============ LOGIN ============ -->
+<!-- ============ LOGIN ============ -->
+<main id="screen-login" class="screen-login" aria-labelledby="login-h">
+
+  <div class="login-shell">
+
+    <!-- ================= BRAND PANEL ================= -->
+    <section class="login-brand">
+
+      <div class="login-brand-content">
+
+        <img
+          src="assets/poornas-kitchen-logo.png"
+          alt="Poorna's Kitchen"
+          class="login-main-logo"
+        >
+
+        <h2 class="login-brand-title">
+          Good Food<br>
+          Happier People <span>♥</span>
+        </h2>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= LOGIN PANEL ================= -->
+    <section class="login-form-side">
+
+      <div class="login-card">
+
+        <header class="login-heading">
+          <h1 id="login-h">Welcome Back</h1>
+          <p>Sign in to continue</p>
+        </header>
+
+
+        <form id="login-form" novalidate>
+
+          <!-- Username -->
+          <div class="login-field">
+
+            <label for="login-user">Username</label>
+
+            <div class="login-input">
+
+              <svg
+                class="login-input-icon"
+                aria-hidden="true"
+              >
+                <use href="#i-users"></use>
+              </svg>
+
+             <input
+  id="login-user"
+  name="user"
+  type="email"
+  autocomplete="email"
+  placeholder="Email address"
+>
+            </div>
+
+          </div>
+
+
+          <!-- Password -->
+          <div class="login-field">
+
+            <label for="login-pass">Password</label>
+
+            <div class="login-input">
+
+              <svg
+                class="login-input-icon"
+                aria-hidden="true"
+              >
+                <use href="#i-card"></use>
+              </svg>
+
+              <input
+                id="login-pass"
+                name="pass"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Password"
+               
+              >
+
+              <button
+                type="button"
+                class="login-eye"
+                id="toggle-pass"
+                aria-label="Show password"
+                aria-pressed="false"
+              >
+                <svg class="ico" aria-hidden="true">
+                  <use href="#i-eye"></use>
+                </svg>
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- Sign In -->
+          <button
+            type="submit"
+            class="btn btn-primary btn-block btn-lg login-submit"
+            id="login-submit"
+          >
+            <span>Sign In</span>
+            <span class="login-arrow">→</span>
+          </button>
+
+
+          <!-- Options -->
+          <div class="login-options">
+
+            <label class="login-remember">
+              <input type="checkbox" checked>
+              <span>Remember me</span>
+            </label>
+
+            <button
+              type="button"
+              class="link-btn"
+              data-demo-note="Password recovery is handled by the owner in the production build."
+            >
+              Forgot password?
+            </button>
+
+          </div>
+
+        </form>
+
+
+        <!-- Quote -->
+        <div class="login-quote">
+
+          <div class="login-quote-line"></div>
+
+          <p>
+            “Great food brings people together.”
+          </p>
+
+          <span>— Poorna's Kitchen</span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+<!-- ============ APP ============ -->
+<div id="app" class="app" hidden>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <img src="assets/poornas-kitchen-logo.png" alt="">
+      <div>
+        <strong>Poorna's Kitchen</strong>
+        <span>Staff Console</span>
+      </div>
+      <button class="sb-close" id="sb-close" aria-label="Close menu"><svg class="ico"><use href="#i-close"></use></svg></button>
+    </div>
+
+    <nav class="sb-nav" aria-label="Main">
+      <p class="sb-group">Counter</p>
+      <button class="sb-link" data-goto="dashboard"><svg class="ico"><use href="#i-dashboard"></use></svg>Dashboard</button>
+      <button class="sb-link" data-goto="search"><svg class="ico"><use href="#i-search"></use></svg>Find customer</button>
+      <button class="sb-link" data-goto="add-customer"><svg class="ico"><use href="#i-userplus"></use></svg>Add customer</button>
+      <p class="sb-group">Records</p>
+      <button class="sb-link" data-goto="customers"><svg class="ico"><use href="#i-users"></use></svg>Customers</button>
+      <button class="sb-link" data-goto="visits"><svg class="ico"><use href="#i-history"></use></svg>Visit history</button>
+      <button class="sb-link" data-goto="rewards"><svg class="ico"><use href="#i-reward"></use></svg>Rewards</button>
+      <p class="sb-group">Admin</p>
+      <button class="sb-link" data-goto="reports"><svg class="ico"><use href="#i-reports"></use></svg>Reports</button>
+      <button class="sb-link" data-goto="settings"><svg class="ico"><use href="#i-settings"></use></svg>Settings</button>
+    </nav>
+
+    <div class="sb-user">
+  <span class="avatar" id="staff-avatar">PK</span>
+
+  <div>
+    <strong id="staff-name">Staff</strong>
+    <span id="staff-email">Staff account</span>
+  </div>
+</div>
+  </aside>
+  <div class="sb-scrim" id="sb-scrim" hidden></div>
+
+  <div class="app-body">
+    <header class="topbar">
+      <button class="icon-btn only-mobile" id="sb-open" aria-label="Open menu"><svg class="ico"><use href="#i-menu"></use></svg></button>
+      <img src="assets/poornas-kitchen-logo.png" alt="" class="topbar-logo only-mobile">
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <button class="btn btn-quiet only-desktop" data-goto="search">
+        <svg class="ico"><use href="#i-search"></use></svg>Find customer
+      </button>
+      <button class="icon-btn only-mobile" data-goto="search" aria-label="Find customer">
+        <svg class="ico"><use href="#i-search"></use></svg>
+      </button>
+      <button class="btn btn-primary" data-goto="add-customer">
+        <svg class="ico"><use href="#i-plus"></use></svg><span class="btn-label">Add customer</span>
+      </button>
+    </header>
+
+    <main class="main" id="main-content" tabindex="-1">
+
+      <!-- ---- DASHBOARD ---- -->
+      <section class="screen" id="screen-dashboard" hidden>
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Today at Poorna's Kitchen</h1>
+            <p class="page-sub" id="dash-date">Monday, 21 September 2026</p>
+          </div>
+        </div>
+
+        <div class="metrics" id="dash-metrics"></div>
+
+        <div class="split">
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Recent visits</h2>
+              <button class="link-btn" data-goto="visits">View all</button>
+            </div>
+            <div id="dash-recent"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head"><h2>Quick actions</h2></div>
+            <div class="quick">
+              <button class="quick-item" data-goto="search">
+                <svg class="ico"><use href="#i-search"></use></svg>
+                <span><strong>Find customer</strong>Look up by phone number</span>
+              </button>
+              <button class="quick-item" data-goto="add-customer">
+                <svg class="ico"><use href="#i-userplus"></use></svg>
+                <span><strong>Add customer</strong>New card, first stamp</span>
+              </button>
+              <button class="quick-item" data-goto="rewards">
+                <svg class="ico"><use href="#i-reward"></use></svg>
+                <span><strong>Rewards</strong>Completed loyalty cards</span>
+              </button>
+            </div>
+            <div class="near-reward" id="dash-near"></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- ---- SEARCH ---- -->
+      <section class="screen" id="screen-search" hidden>
+        <div class="page-head narrow">
+          <h1 class="page-title">Find customer</h1>
+          <p class="page-sub">Search using the customer's registered phone number.</p>
+        </div>
+
+        <div class="form-shell">
+          <form id="search-form" novalidate>
+            <div class="field">
+              <label for="search-phone">Phone number</label>
+              <div class="search-row">
+                <div class="input-affix affix-left">
+                  <span class="affix-static">+91</span>
+                  <input id="search-phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" aria-describedby="search-err">
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">Search</button>
+              </div>
+              <p class="field-err" id="search-err" hidden></p>
+            </div>
+          </form>
+
+          <div class="try-row">
+            <span>Try:</span>
+            <button class="chip" data-fill="9876543210">9876543210</button>
+            <button class="chip" data-fill="9156784321">9156784321</button>
+            <button class="chip" data-fill="9000000000">9000000000</button>
+          </div>
+
+          <div id="search-result" class="search-result"></div>
+        </div>
+      </section>
+
+      <!-- ---- CUSTOMER PROFILE ---- -->
+      <section class="screen" id="screen-profile" hidden>
+        <button class="back-btn" id="profile-back"><svg class="ico"><use href="#i-back"></use></svg>Back</button>
+        <div id="profile-body"></div>
+      </section>
+
+      <!-- ---- ADD CUSTOMER ---- -->
+      <section class="screen" id="screen-add-customer" hidden>
+        <div class="page-head narrow">
+          <h1 class="page-title">Add new customer</h1>
+          <p class="page-sub">Create a customer record and register their first visit.</p>
+        </div>
+
+        <div class="form-shell">
+          <div id="add-success" hidden></div>
+          <form id="add-form" novalidate>
+            <div class="field">
+              <label for="add-name">Customer name</label>
+              <input id="add-name" type="text" placeholder="As the customer gives it" autocomplete="off" aria-describedby="add-name-err">
+              <p class="field-err" id="add-name-err" hidden></p>
+            </div>
+            <div class="field">
+              <label for="add-phone">Phone number</label>
+              <div class="input-affix affix-left">
+                <span class="affix-static">+91</span>
+                <input id="add-phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number" aria-describedby="add-phone-err">
+              </div>
+              <p class="field-hint">Used to find the customer on their next visit.</p>
+              <p class="field-err" id="add-phone-err" hidden></p>
+            </div>
+            <div id="dup-notice" hidden></div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-lg" id="add-submit">Create customer &amp; add first visit</button>
+              <button type="button" class="btn btn-quiet btn-lg" data-goto="customers">Cancel</button>
+            </div>
+            <p class="form-note">Hand the customer a physical card and stamp slot 1 after saving.</p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ---- CUSTOMERS ---- -->
+      <section class="screen" id="screen-customers" hidden>
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Customers</h1>
+            <p class="page-sub">Manage customer records and loyalty progress.</p>
+          </div>
+          <button class="btn btn-primary" data-goto="add-customer"><svg class="ico"><use href="#i-plus"></use></svg>Add customer</button>
+        </div>
+
+        <div class="toolbar">
+          <div class="input-affix affix-left grow">
+            <span class="affix-static"><svg class="ico"><use href="#i-search"></use></svg></span>
+            <input id="cust-filter" type="search" placeholder="Search by name or phone">
+          </div>
+          <select id="cust-sort" aria-label="Sort customers">
+            <option value="recent">Last visit</option>
+            <option value="name">Name A–Z</option>
+            <option value="visits">Most visits</option>
+            <option value="close">Closest to reward</option>
+          </select>
+        </div>
+
+        <div id="customers-body"></div>
+      </section>
+
+      <!-- ---- VISIT HISTORY ---- -->
+      <section class="screen" id="screen-visits" hidden>
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Visit history</h1>
+            <p class="page-sub">Every visit recorded at the counter.</p>
+          </div>
+        </div>
+        <div class="toolbar">
+          <div class="input-affix affix-left grow">
+            <span class="affix-static"><svg class="ico"><use href="#i-search"></use></svg></span>
+            <input id="visit-filter" type="search" placeholder="Search by name or phone">
+          </div>
+          <input type="date" id="visit-date" aria-label="Filter by date">
+          <button class="btn btn-quiet" id="visit-clear">Clear</button>
+        </div>
+        <div id="visits-body"></div>
+      </section>
+
+      <!-- ---- REWARDS ---- -->
+      <section class="screen" id="screen-rewards" hidden>
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Rewards</h1>
+            <p class="page-sub">Discounts given when a customer completed a five-visit card.</p>
+          </div>
+        </div>
+        <div id="rewards-body"></div>
+      </section>
+
+      <!-- ---- REPORTS ---- -->
+      <section class="screen" id="screen-reports" hidden>
+        <div class="page-head">
+          <h1 class="page-title">Reports</h1>
+          <p class="page-sub">Exports and trends, once the counter data has built up.</p>
+        </div>
+        <div class="placeholder-page">
+          <svg class="ico ph-ico"><use href="#i-reports"></use></svg>
+          <h2>Nothing to report yet</h2>
+          <p>Reporting is intentionally empty in this release. The dashboard already answers the daily question — how many visits and rewards happened. Anything beyond that needs a real business question behind it first.</p>
+          <ul class="ph-list">
+            <li>Monthly visits and rewards, exportable to CSV</li>
+            <li>Repeat-rate: how many first visits come back</li>
+            <li>Total discount given per month</li>
+          </ul>
+          <p class="ph-note">Business decision required: which of these the owner actually reviews, and how often.</p>
+        </div>
+      </section>
+
+      <!-- ---- SETTINGS ---- -->
+      <section class="screen" id="screen-settings" hidden>
+        <div class="page-head">
+          <h1 class="page-title">Settings</h1>
+          <p class="page-sub">Console and business preferences.</p>
+        </div>
+        <div class="settings-list">
+          <button class="setting-row" data-demo-note="Staff profile editing arrives with real accounts.">
+            <span><strong>Staff profile</strong>Name, email and password</span><span class="row-meta">Counter staff</span>
+          </button>
+          <button class="setting-row" data-demo-note="Cycle length is fixed at 5 to match the printed card.">
+            <span><strong>Loyalty card</strong>Stamps needed for a reward</span><span class="row-meta">5 visits</span>
+          </button>
+          <button class="setting-row" data-demo-note="The default is a starting value only — staff can still type any percentage.">
+            <span><strong>Default discount</strong>Pre-filled on the reward screen</span><span class="row-meta">10%</span>
+          </button>
+          <button class="setting-row" data-demo-note="Deleted customers are archived, not erased, in the production build.">
+            <span><strong>Deleted customers</strong>How removal is handled</span><span class="row-meta">Archive</span>
+          </button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============ ONE MODAL LAYER ============ -->
+<div class="modal-layer" id="modal-layer" hidden>
+  <div class="modal-scrim" data-modal-dismiss></div>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal"></div>
+</div>
+
+<!-- ============ TOASTS ============ -->
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+</body>
+</html>
